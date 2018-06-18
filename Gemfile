@@ -22,4 +22,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-gem 'devise', '~>4.4.1'
+gem 'devise'
+gem 'omniauth'
+gem 'devise_token_auth'
