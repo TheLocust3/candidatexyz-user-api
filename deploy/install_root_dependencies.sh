@@ -6,7 +6,7 @@ cd /home/ubuntu
 
 sudo apt-get update
 
-sudo apt-get install libpq-dev # pg gem dependency
+sudo apt-get install -y libpq-dev # pg gem dependency
 
 # install updated version of ruby build
 sudo apt-get install -y rbenv ruby-build autoconf bison
