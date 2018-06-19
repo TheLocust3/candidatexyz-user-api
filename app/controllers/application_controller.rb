@@ -14,4 +14,16 @@ class ApplicationController < ActionController::API
             render :json => { 'errors': { 'user': [ 'not admin' ] } }, :status => 401
         end
     end
+
+    def render_success
+        render :json => { 'status': 'ok' }
+    end
+
+    def render_error(error)
+        render :json => { 'errors': { error: [error] } }, :status => 400
+    end
+
+    def render_errors(model)
+        render :json => { 'errors': model.errors.messages }, :status => 400
+    end
 end

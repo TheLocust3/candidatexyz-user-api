@@ -1,4 +1,7 @@
+require 'httparty'
+
 class UsersController < ApplicationController
+    include Request
 
     before_action :authenticate_user!, only: [ :index, :show, :update, :destroy ]
     before_action :authenticate_admin!, only: [ :update, :create_invite ]
@@ -13,16 +16,18 @@ class UsersController < ApplicationController
         render
     end
 
-    def get_current_user
-      render :json => current_user
-    end
-
     def create_invite
         token = PerishableToken.create_good_until_tomorrow(current_user.id)
+        subject = 'Join Staff'
+        body = "<a href='#{params[:redirect_to]}?token=#{token}'>Join.</a>"
 
-        Mailer.staff_invite(params[:email], token.encode).deliver_later
-
-        render_success
+        data = post("#{Rails.application.secrets.mailer_api}/company", { to: params[:email], subject: subject, body: body })
+        
+        if data['status'] != 200
+            render_error(data['error'])
+        else
+            render_success
+        end
     end
 
     def create
