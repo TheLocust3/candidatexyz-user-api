@@ -19,11 +19,11 @@ class UsersController < ApplicationController
     def create_invite
         token = PerishableToken.create_good_until_tomorrow(current_user.id)
         subject = 'Join Staff'
-        body = "<a href='#{params[:redirect_to]}?token=#{token}'>Join.</a>"
+        body = "<a href='#{params[:url]}/#{token.to_s}'>Join.</a>"
 
         data = post("#{Rails.application.secrets.mailer_api}/company", { to: params[:email], subject: subject, body: body })
         
-        if data['status'] != 200
+        if data['status'].to_i >= 400
             render_error(data['error'])
         else
             render_success

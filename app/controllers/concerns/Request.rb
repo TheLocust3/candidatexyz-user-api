@@ -5,7 +5,7 @@ module Request
   
     def post(url, data)
         response = HTTParty.post(url, {
-            data: data,
+            query: data,
             headers: {
                 uid: request.headers['uid'],
                 client: request.headers['client'],
