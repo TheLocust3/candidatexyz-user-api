@@ -25,3 +25,4 @@ end
 gem 'devise'
 gem 'omniauth'
 gem 'devise_token_auth'
+gem 'active_model_serializers'
