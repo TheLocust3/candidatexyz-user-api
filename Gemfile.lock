@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/TheLocust3/candidatexyz-common.git
+  revision: d5748fb2f716cf8272b182601cd27f4ec4f38c8b
+  specs:
+    candidatexyz-common (0.1.0)
+      httparty
+      rails (~> 5.1.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -160,6 +168,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   byebug
+  candidatexyz-common!
   devise
   devise_token_auth
   httparty

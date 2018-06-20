@@ -1,7 +1,5 @@
-require 'httparty'
-
 class UsersController < ApplicationController
-    include Request
+    include CandidateXYZ::Concerns::Request
 
     before_action :authenticate_user!, only: [ :index, :show, :update, :destroy ]
     before_action :authenticate_admin!, only: [ :update, :create_invite ]
@@ -21,7 +19,7 @@ class UsersController < ApplicationController
         subject = 'Join Staff'
         body = "<a href='#{params[:url]}#{token.encode}'>Join.</a>"
 
-        data = post("#{Rails.application.secrets.mailer_api}/company", { to: params[:email], subject: subject, body: body })
+        data = post("#{Rails.application.secrets.mailer_api}/company", { email: params[:email], subject: subject, body: body })
         
         if data['status'].to_i >= 400
             render_error(data['error'])

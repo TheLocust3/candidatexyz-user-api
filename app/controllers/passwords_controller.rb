@@ -1,5 +1,5 @@
 class PasswordsController < DeviseTokenAuth::PasswordsController
-    include Request
+    include CandidateXYZ::Concerns::Request
 
     def create
         super do |resource|
