@@ -11,6 +11,7 @@ Environment=RAILS_ENV=production
 WorkingDirectory=/home/ubuntu/rails
 TimeoutStartSec=300
 
+ExecStartPre=/home/ubuntu/rails/bin/rake db:drop
 ExecStartPre=/home/ubuntu/rails/bin/rake db:create
 ExecStartPre=/home/ubuntu/rails/bin/rake db:migrate
 ExecStartPre=/home/ubuntu/rails/bin/rake db:seed
