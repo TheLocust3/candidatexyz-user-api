@@ -5,7 +5,7 @@ class PasswordsController < DeviseTokenAuth::PasswordsController
         super do |resource|
             token = resource.reset_password_token
       
-            post("#{Rails.application.secrets.mailer_api}/reset_password", { email: resource.email, redirect_url: params[:redirect_url], token: token })
+            post("#{Rails.application.secrets.mailer_api}/reset_password", { email: resource.email, token: token })
 
             render :json => { 'status': 'ok' }
 
