@@ -6,7 +6,7 @@ class User < ApplicationRecord
     set_reset_password_token
   end
 
-  def as_json(options)
+  def as_json(options = {})
     ActiveModelSerializers::SerializableResource.new(
       self,
       serializer: UserSerializer,

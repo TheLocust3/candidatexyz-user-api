@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     def create_invite
         token = PerishableToken.create_good_until_tomorrow(current_user.id)
         subject = 'Join Staff'
-        body = "<a href='#{params[:url]}/#{token.to_s}'>Join.</a>"
+        body = "<a href='#{params[:url]}#{token.encode}'>Join.</a>"
 
         data = post("#{Rails.application.secrets.mailer_api}/company", { to: params[:email], subject: subject, body: body })
         
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
             token.destroy
             @user = User.new(create_params(params))
 
-            if user.save
+            if @user.save
                 render 'show'
             else
                 render_errors(@user)
