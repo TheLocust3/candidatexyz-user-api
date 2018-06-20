@@ -8,11 +8,9 @@ Environment=PATH=/home/ubuntu/.rbenv/versions/2.5.0/bin:/sbin:/bin:/usr/sbin:/us
 Environment=DISABLE_SPRING=true
 Environment=RAILS_SERVE_STATIC_FILES=true
 Environment=RAILS_ENV=production
-Environment=DISABLE_DATABASE_ENVIRONMENT_CHECK=1
 WorkingDirectory=/home/ubuntu/rails
 TimeoutStartSec=300
 
-ExecStartPre=/home/ubuntu/rails/bin/rake db:drop
 ExecStartPre=/home/ubuntu/rails/bin/rake db:create
 ExecStartPre=/home/ubuntu/rails/bin/rake db:migrate
 ExecStartPre=/home/ubuntu/rails/bin/rake db:seed
