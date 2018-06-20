@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'root#index'
+
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
     passwords:  'passwords'
   }
