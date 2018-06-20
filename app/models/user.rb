@@ -2,6 +2,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
+  belongs_to :campaign
+
   def reset_password_token
     set_reset_password_token
   end

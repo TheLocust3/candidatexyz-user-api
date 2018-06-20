@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   post 'staff/create_invite' => 'users#create_invite'
   patch 'staff/:id' => 'users#update'
   delete 'staff/:id' => 'users#destroy'
+
+  resources :campaigns, defaults: { format: :json }
 end
