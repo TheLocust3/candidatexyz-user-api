@@ -1,6 +1,9 @@
 class CampaignsController < ApplicationController
+    include CandidateXYZ::Concerns::Authenticatable
+
     before_action :authenticate_user!, only: [ :index, :show, :create, :update, :destroy ]
     before_action :authenticate_admin!, only: [ :create, :update, :destroy ]
+    before_action :authenticate_superuser, only: [ :index ]
 
     def index
         @campaigns = Campaign.all
@@ -9,9 +12,12 @@ class CampaignsController < ApplicationController
     end
 
     def show
-        @campaign = Campaign.find(params[:id])
-
-        render
+        if current_user.campaign_id == params[:id]
+            @campaign = Campaign.where( :id params[:id] ).first
+            render
+        else
+            render :json => {}, :status => 401
+        end
     end
 
     def create
@@ -25,6 +31,10 @@ class CampaignsController < ApplicationController
     end
 
     def update
+        if current_user.campaign_id != params[:id]
+            render :json => {}, :status => 401
+        end
+
         @campaign = Campaign.find(params[:id])
 
         if @campaign.update(update_params(params))
@@ -35,6 +45,10 @@ class CampaignsController < ApplicationController
     end
 
     def destroy
+        if current_user.campaign_id != params[:id]
+            render :json => {}, :status => 401
+        end
+        
         campaign = Campaign.find(params[:id])
         campaign.destroy
 

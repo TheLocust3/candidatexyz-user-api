@@ -1,16 +1,20 @@
 class UsersController < ApplicationController
     include CandidateXYZ::Concerns::Request
+    include CandidateXYZ::Concerns::Authenticatable
 
     before_action :authenticate_user!, only: [ :index, :show, :update, :destroy ]
     before_action :authenticate_admin!, only: [ :update, :create_invite ]
+    before_action :authenticate_campaign_id
 
     def index
-        @users = User.all
+        @users = User.where( :campaign_id => @campaign_id )
+
         render
     end
 
     def show
-        @user = User.find(params[:id])
+        @user = User.where( :id => params[:id], :campaign_id => @campaign_id).first
+
         render
     end
 
@@ -30,9 +34,11 @@ class UsersController < ApplicationController
 
     def create
         token = PerishableToken.decode(params[:token])
+        admin_user = User.find(token.data)
 
-        if DateTime.now < token.good_until && User.find(token.data).admin
+        if DateTime.now < token.good_until && admin_user.admin
             token.destroy
+            params[:campaign_id] = admin_user.campaign_id
             @user = User.new(create_params(params))
 
             if @user.save
@@ -46,7 +52,7 @@ class UsersController < ApplicationController
     end
 
     def update
-        @user = User.find(params[:id])
+        @user = User.where( :id => params[:id], :campaign_id => @campaign_id).first
 
         if @user.update(update_params(params))
             render 'show'
@@ -56,7 +62,7 @@ class UsersController < ApplicationController
     end
 
     def destroy
-        user = User.find(params[:id])
+        user = User.where( :id => params[:id], :campaign_id => @campaign_id).first
         user.destroy
 
         render_success
@@ -64,7 +70,7 @@ class UsersController < ApplicationController
 
     private
     def create_params(params)
-        params.permit(:email, :first_name, :last_name, :password, :password_confirmation)
+        params.permit(:email, :first_name, :last_name, :password, :password_confirmation, :campaign_id)
     end
 
     def update_params(params)

@@ -1,4 +1,5 @@
 json.id user.id
+json.campaign_id user.campaign_id
 json.email user.email
 
 json.firstName user.first_name

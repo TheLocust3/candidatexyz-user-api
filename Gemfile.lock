@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/TheLocust3/candidatexyz-common.git
-  revision: d5748fb2f716cf8272b182601cd27f4ec4f38c8b
+  revision: e795ca4e5dc679626c3dda6e217361bf542314db
   specs:
     candidatexyz-common (0.1.0)
       httparty
@@ -73,7 +73,7 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hashie (3.5.7)
-    httparty (0.16.1)
+    httparty (0.16.2)
       multi_xml (>= 0.5.2)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
@@ -97,7 +97,7 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.6.0)
     nio4r (2.3.1)
-    nokogiri (1.8.2)
+    nokogiri (1.8.3)
       mini_portile2 (~> 2.3.0)
     omniauth (1.8.1)
       hashie (>= 3.4.6, < 3.6.0)
@@ -145,7 +145,7 @@ GEM
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 3.0)
-    sprockets (3.7.1)
+    sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.1)
