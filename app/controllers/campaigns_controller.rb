@@ -6,14 +6,19 @@ class CampaignsController < ApplicationController
     before_action :authenticate_superuser, only: [ :index ]
 
     def index
-        @campaigns = Campaign.all
+        @campaigns = []
+        if params[:name].nil?
+            @campaigns = Campaign.all
+        else
+            @campaigns = Campaign.where( :name => params[:name] )
+        end
 
         render
     end
 
     def show
         if current_user.campaign_id == params[:id]
-            @campaign = Campaign.where( :id params[:id] ).first
+            @campaign = Campaign.where( :id => params[:id] ).first
             render
         else
             render :json => {}, :status => 401
@@ -48,7 +53,7 @@ class CampaignsController < ApplicationController
         if current_user.campaign_id != params[:id]
             render :json => {}, :status => 401
         end
-        
+
         campaign = Campaign.find(params[:id])
         campaign.destroy
 
