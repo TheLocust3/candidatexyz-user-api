@@ -6,14 +6,15 @@ class CampaignsController < ApplicationController
     before_action :authenticate_superuser, only: [ :index ]
 
     def index
-        @campaigns = []
-        if params[:name].nil?
-            @campaigns = Campaign.all
-        else
-            @campaigns = Campaign.where( :name => params[:name] )
-        end
+        @campaigns = Campaign.all
 
         render
+    end
+
+    def show_by_name
+        @campaign = Campaign.where( :name => params[:name] ).first
+
+        render 'show'
     end
 
     def show
