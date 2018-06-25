@@ -3,11 +3,11 @@ class UsersController < ApplicationController
     include CandidateXYZ::Concerns::Authenticatable
 
     before_action :authenticate_user!, only: [ :index, :show, :update, :destroy ]
-    before_action :authenticate_admin!, only: [ :update, :create_invite ]
+    before_action :authenticate_admin!, only: [ :update, :destroy, :create_invite ]
     before_action :authenticate_campaign_id
 
     def index
-        @users = User.where( :campaign_id => @campaign_id )
+        @users = User.where( :campaign_id => @campaign_id, :superuser => false )
 
         render
     end
