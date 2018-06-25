@@ -57,6 +57,11 @@ resource "random_id" "random" {
   byte_length = 8
 }
 
+resource "aws_s3_bucket" "bucket" {
+  bucket = "candidatexyz-${var.name}"
+  acl    = "aws-exec-read"
+}
+
 resource "aws_security_group" "security_group" {
   name        = "${var.name} security group"
   description = "Managed by Terraform"
@@ -233,7 +238,7 @@ resource "aws_db_instance" "db_instance" {
   allocated_storage      = "5"
   storage_type           = "gp2"
   engine                 = "postgres"
-  engine_version         = "9.6.3"
+  engine_version         = "9.6.6"
   instance_class         = "db.t2.micro"
   vpc_security_group_ids = ["${aws_security_group.db_security_group.id}"]
 

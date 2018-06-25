@@ -1,5 +1,7 @@
 #!/bin/bash
 
+NAME=volunteerapi
+BUCKET=candidatexyz-$NAME
 RUBY_VERSION=2.5.0 # Need to also update service file with different ruby version
 
 set -e
@@ -28,7 +30,13 @@ sudo systemctl restart nginx
 # setup server
 cd /home/ubuntu/rails
 
+sudo apt-get install -y awscli
+
+aws s3 cp s3://candidatexyz-volunteerapi/common.tar.gz /home/ubuntu/rails/
+tar -xvzf common.tar.gz
+
 # pull secrets
 export $(cat /home/ubuntu/secrets.env | xargs)
 
+bundle config --local local.candidatexyz-common /home/ubuntu/rails/common
 bundle install
