@@ -1,10 +1,11 @@
 GIT
   remote: https://github.com/TheLocust3/candidatexyz-common.git
-  revision: d48a892839bc36a6fa07a91fec8c80b9aa45bb29
+  revision: 00dd5dc8f9f4162ace96462bbcd167dde6a2945a
+  branch: master
   specs:
     candidatexyz-common (0.1.0)
       httparty
-      rails (~> 5.1.6)
+      rails (~> 5.1.4)
 
 GEM
   remote: https://rubygems.org/

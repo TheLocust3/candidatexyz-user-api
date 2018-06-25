@@ -14,10 +14,6 @@ variable "common_name" {
   default = "api"
 }
 
-variable "username" {
-  default = "authapi"
-}
-
 variable "key" {
   default = "candidatexyz"
 }
