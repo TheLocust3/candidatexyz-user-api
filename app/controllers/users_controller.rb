@@ -15,7 +15,11 @@ class UsersController < ApplicationController
     def show
         @user = User.where( :id => params[:id], :campaign_id => @campaign_id).first
 
-        render
+        if @user.nil?
+            not_found
+        else
+            render
+        end
     end
 
     def create_invite

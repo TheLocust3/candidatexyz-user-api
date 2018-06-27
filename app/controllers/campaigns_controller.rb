@@ -20,7 +20,12 @@ class CampaignsController < ApplicationController
     def show
         if current_user.campaign_id == params[:id]
             @campaign = Campaign.where( :id => params[:id] ).first
-            render
+
+            if @campaign.nil?
+                not_found
+            else
+                render
+            end
         else
             render :json => {}, :status => 401
         end

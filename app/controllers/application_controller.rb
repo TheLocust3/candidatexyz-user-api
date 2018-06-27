@@ -26,4 +26,8 @@ class ApplicationController < ActionController::API
     def render_errors(model)
         render :json => { 'errors': model.errors.messages }, :status => 400
     end
+
+    def not_found
+        render :json => {}, :status => 404
+    end
 end
