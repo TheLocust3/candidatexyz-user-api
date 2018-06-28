@@ -1,6 +1,6 @@
-campaign = Campaign.where(name: 'Reading Democratic Committe').first
+campaign = Campaign.where(name: 'Reading Democratic Committee').first
 if campaign.nil?
-    campaign = Campaign.create!(name: 'Reading Democratic Committe')
+    campaign = Campaign.create!(name: 'Reading Democratic Committee')
 end
 
 if User.where(email: 'jake.kinsella@gmail.com').length == 0
