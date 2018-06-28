@@ -14,7 +14,11 @@ class CampaignsController < ApplicationController
     def show_by_name
         @campaign = Campaign.where( :name => params[:name] ).first
 
-        render 'show'
+        if @campaign.nil?
+            not_found
+        else
+            render 'show'
+        end
     end
 
     def show
