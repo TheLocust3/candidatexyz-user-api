@@ -7,10 +7,12 @@ EnvironmentFile=/home/ubuntu/secrets.env
 Environment=PATH=/home/ubuntu/.rbenv/versions/2.5.0/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
 Environment=DISABLE_SPRING=true
 Environment=RAILS_SERVE_STATIC_FILES=true
+Environment=DISABLE_DATABASE_ENVIRONMENT_CHECK=1
 Environment=RAILS_ENV=production
 WorkingDirectory=/home/ubuntu/rails
 TimeoutStartSec=300
 
+ExecStartPre=/home/ubuntu/rails/bin/rake db:drop
 ExecStartPre=/home/ubuntu/rails/bin/rake db:create
 ExecStartPre=/home/ubuntu/rails/bin/rake db:migrate
 ExecStartPre=/home/ubuntu/rails/bin/rake db:seed
