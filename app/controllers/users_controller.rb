@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
     before_action :authenticate_user!, only: [ :index, :show, :update, :destroy ]
     before_action :authenticate_admin!, only: [ :update, :destroy, :create_invite ]
-    before_action :authenticate_campaign_id
+    before_action :authenticate_campaign_id, except: [ :create ]
 
     def index
         @users = User.where( :campaign_id => @campaign_id, :superuser => false )
@@ -41,11 +41,12 @@ class UsersController < ApplicationController
         admin_user = User.find(token.data)
 
         if DateTime.now < token.good_until && admin_user.admin
-            token.destroy
             params[:campaign_id] = admin_user.campaign_id
             @user = User.new(create_params(params))
 
             if @user.save
+                token.destroy
+                
                 render 'show'
             else
                 render_errors(@user)
