@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   delete 'staff/:id' => 'users#destroy'
 
   resources :campaigns, defaults: { format: :json }
-  get 'campaigns/name/:name' => 'campaigns#show_by_name'
+  get 'campaigns/name/:name' => 'campaigns#show_by_name', defaults: { format: :json }
 end

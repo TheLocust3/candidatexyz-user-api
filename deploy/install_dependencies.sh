@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NAME=volunteerapi
+NAME=authapi
 BUCKET=candidatexyz-$NAME
 RUBY_VERSION=2.5.0 # Need to also update service file with different ruby version
 
@@ -32,7 +32,7 @@ cd /home/ubuntu/rails
 
 sudo apt-get install -y awscli
 
-aws s3 cp s3://candidatexyz-volunteerapi/common.tar.gz /home/ubuntu/rails/
+aws s3 cp s3://$BUCKET/common.tar.gz /home/ubuntu/rails/
 tar -xvzf common.tar.gz
 
 # pull secrets
