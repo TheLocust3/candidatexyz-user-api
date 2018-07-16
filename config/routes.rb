@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   patch 'staff/:id' => 'users#update'
   delete 'staff/:id' => 'users#destroy'
 
+  get 'campaigns/users_with_committee_positions' => 'campaigns#get_users_with_committee_positions', defaults: { format: :json }
   resources :campaigns, defaults: { format: :json }
   get 'campaigns/name/:name' => 'campaigns#show_by_name', defaults: { format: :json }
 end
