@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180629152127) do
+ActiveRecord::Schema.define(version: 20180716123917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 20180629152127) do
   end
 
   create_table "perishable_tokens", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string "data"
     t.datetime "good_until"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "data"
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20180629152127) do
     t.boolean "admin", default: false
     t.boolean "superuser", default: false
     t.uuid "campaign_id", null: false
+    t.string "position"
     t.index ["campaign_id"], name: "index_users_on_campaign_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

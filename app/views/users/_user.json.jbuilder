@@ -7,3 +7,4 @@ json.lastName user.last_name
 
 json.admin user.admin
 json.superuser user.superuser
+json.position user.position

@@ -1,10 +1,17 @@
 class User < ApplicationRecord
+  @@POSITIONS = ['', 'Candidate', 'Chairman', 'Treasurer']
+
   validate :superuser_attributes
+  validates :position, position: true
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
   belongs_to :campaign
+
+  def self.POSITIONS
+    @@POSITIONS
+  end
 
   def reset_password_token
     set_reset_password_token

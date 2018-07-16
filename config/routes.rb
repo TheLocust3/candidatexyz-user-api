@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     passwords:  'passwords'
   }
 
+  get 'staff_positions' => 'users#get_positions'
   get 'staff' => 'users#index'
   get 'staff/:id' => 'users#show'
   post 'staff' => 'users#create'

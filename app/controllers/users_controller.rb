@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     include CandidateXYZ::Concerns::Request
     include CandidateXYZ::Concerns::Authenticatable
 
-    before_action :authenticate_user!, only: [ :index, :show, :update, :destroy ]
+    before_action :authenticate_user!, only: [ :index, :show, :update, :destroy, :get_positions ]
     before_action :authenticate_admin!, only: [ :update, :destroy, :create_invite ]
     before_action :authenticate_campaign_id, except: [ :create ]
 
@@ -22,8 +22,14 @@ class UsersController < ApplicationController
         end
     end
 
+    def get_positions
+        @positions = User.POSITIONS
+
+        render 'positions'
+    end
+
     def create_invite
-        token = PerishableToken.create_good_until_tomorrow(current_user.id)
+        token = PerishableToken.create_good_until_tomorrow({ id: current_user.id, position: params[:position] })
         subject = 'Join Staff'
         body = "<a href='#{params[:url]}#{token.encode}'>Join.</a>"
 
@@ -38,11 +44,13 @@ class UsersController < ApplicationController
 
     def create
         token = PerishableToken.decode(params[:token])
-        admin_user = User.find(token.data)
+        admin_user = User.find(token.data['id'])
 
         if DateTime.now < token.good_until && admin_user.admin
-            params[:campaign_id] = admin_user.campaign_id
-            @user = User.new(create_params(params))
+            parameters = create_params(params)
+            parameters[:campaign_id] = admin_user.campaign_id
+            parameters[:position] = token.data['position']
+            @user = User.new(parameters)
 
             if @user.save
                 token.destroy
@@ -79,6 +87,6 @@ class UsersController < ApplicationController
     end
 
     def update_params(params)
-        params.permit(:email, :first_name, :last_name, :admin)
+        params.permit(:email, :first_name, :last_name, :admin, :position)
     end
 end
