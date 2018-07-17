@@ -10,3 +10,5 @@ json.country committee.country
 
 json.office committee.office
 json.district committee.district
+
+json.bank committee.bank

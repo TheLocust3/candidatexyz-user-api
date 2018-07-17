@@ -82,7 +82,7 @@ class CampaignsController < ApplicationController
 
     private
     def create_params(params)
-        params.permit(:name, :url, :election_day, :preliminary_day)
+        params.permit(:name, :url, :election_day, :preliminary_day, :bank)
     end
 
     def update_params(params)

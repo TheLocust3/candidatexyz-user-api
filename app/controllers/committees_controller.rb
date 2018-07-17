@@ -68,10 +68,10 @@ class CommitteesController < ApplicationController
 
     private
     def create_params(params)
-        params.permit(:name, :email, :phone_number, :address, :city, :state, :country, :office, :district)
+        params.permit(:name, :email, :phone_number, :address, :city, :state, :country, :office, :district, :bank)
     end
 
     def update_params(params)
-        params.permit(:name, :email, :phone_number, :address, :city, :state, :country, :office, :district)
+        params.permit(:name, :email, :phone_number, :address, :city, :state, :country, :office, :district, :bank)
     end
 end

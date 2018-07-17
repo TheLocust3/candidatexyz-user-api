@@ -13,6 +13,8 @@ class Committee < ApplicationRecord
   validates :office, presence: true
   validates :district, presence: true
 
+  validates :bank, presence: true
+
   belongs_to :campaign
 
   private
