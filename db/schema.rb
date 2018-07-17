@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180717111037) do
+ActiveRecord::Schema.define(version: 20180717115653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20180717111037) do
     t.datetime "updated_at", null: false
     t.string "url"
     t.datetime "election_day"
+    t.datetime "preliminary_day"
   end
 
   create_table "committees", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
