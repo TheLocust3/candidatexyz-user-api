@@ -12,6 +12,7 @@ json.address user.address
 json.city user.city
 json.state user.state
 json.country user.country
+json.zipcode user.zipcode
 
 json.admin user.admin
 json.superuser user.superuser

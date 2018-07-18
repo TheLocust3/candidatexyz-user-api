@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  @@POSITIONS = ['', 'Candidate', 'Chair', 'Treasurer']
-  @@COMMITTEE_POSITIONS = ['Candidate', 'Chair', 'Treasurer']
+  @@POSITIONS = ['', 'Candidate', 'Chair', 'Treasurer', 'Other PAC Officer']
+  @@COMMITTEE_POSITIONS = ['Candidate', 'Chair', 'Treasurer', 'Other PAC Officer']
 
   before_validation :sanitize_phone_number
 
@@ -73,6 +73,10 @@ class User < ApplicationRecord
 
       if self.country.nil? || self.country.empty?
         errors.add(:country, 'position requires country')
+      end
+
+      if self.zipcode.nil? || self.zipcode.empty?
+        errors.add(:zipcode, 'position requires zipcode')
       end
 
       if self.phone_number.nil? || self.phone_number.empty?
