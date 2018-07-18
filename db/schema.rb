@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180717154419) do
+ActiveRecord::Schema.define(version: 20180718124313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,23 +23,6 @@ ActiveRecord::Schema.define(version: 20180717154419) do
     t.string "url"
     t.datetime "election_day"
     t.datetime "preliminary_day"
-  end
-
-  create_table "committees", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.string "name", null: false
-    t.string "email", null: false
-    t.string "phone_number", null: false
-    t.string "address", null: false
-    t.string "city", null: false
-    t.string "state", null: false
-    t.string "country", null: false
-    t.string "office", null: false
-    t.string "district", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.uuid "campaign_id", null: false
-    t.string "bank"
-    t.index ["campaign_id"], name: "index_committees_on_campaign_id"
   end
 
   create_table "perishable_tokens", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
