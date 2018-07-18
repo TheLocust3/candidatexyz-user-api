@@ -37,7 +37,7 @@ class CampaignsController < ApplicationController
 
     def get_users_with_committee_positions
         if current_user.campaign_id == params[:id]
-            @users = User.where( :position => User.COMMITTEE_POSITIONS, :campaign_id => current_user.campaign_id )
+            @users = User.where( :campaign_id => current_user.campaign_id ).where.not( :position => '' )
 
             render 'users/index'
         else

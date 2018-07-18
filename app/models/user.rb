@@ -1,12 +1,10 @@
 class User < ApplicationRecord
   @@POSITIONS = ['', 'Candidate', 'Chair', 'Treasurer', 'Other PAC Officer']
-  @@COMMITTEE_POSITIONS = ['Candidate', 'Chair', 'Treasurer', 'Other PAC Officer']
 
   before_validation :sanitize_phone_number
 
   validate :superuser_attributes
   validate :position_info
-  validates :position, position: true
   validates :phone_number, number: true
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
@@ -16,10 +14,6 @@ class User < ApplicationRecord
 
   def self.POSITIONS
     @@POSITIONS
-  end
-
-  def self.COMMITTEE_POSITIONS
-    @@COMMITTEE_POSITIONS
   end
 
   def reset_password_token
@@ -58,7 +52,7 @@ class User < ApplicationRecord
   end
 
   def position_info
-    if @@COMMITTEE_POSITIONS.include? self.position
+    unless self.position.nil? || self.position.empty?
       if self.address.nil? || self.address.empty?
         errors.add(:address, 'position requires address')
       end
