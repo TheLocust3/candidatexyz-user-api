@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  @@POSITIONS = ['', 'Candidate', 'Chairman', 'Treasurer']
-  @@COMMITTEE_POSITIONS = ['Candidate', 'Chairman', 'Treasurer']
+  @@POSITIONS = ['', 'Candidate', 'Chair', 'Treasurer']
+  @@COMMITTEE_POSITIONS = ['Candidate', 'Chair', 'Treasurer']
 
   before_validation :sanitize_phone_number
 
