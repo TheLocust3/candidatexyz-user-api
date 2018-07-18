@@ -6,6 +6,8 @@ json.firstName user.first_name
 json.lastName user.last_name
 
 json.phoneNumber user.phone_number
+json.party user.party
+
 json.address user.address
 json.city user.city
 json.state user.state

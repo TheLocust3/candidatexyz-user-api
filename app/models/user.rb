@@ -78,6 +78,10 @@ class User < ApplicationRecord
       if self.phone_number.nil? || self.phone_number.empty?
         errors.add(:phone_number, 'position requires phone_number')
       end
+
+      if self.party.nil? || self.party.empty?
+        errors.add(:party, 'position requires party')
+      end
     end
   end
 end
