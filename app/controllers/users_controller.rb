@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
     before_action :authenticate_user!, only: [ :index, :show, :update, :destroy, :get_positions ]
     before_action :authenticate_admin!, only: [ :update, :destroy, :create_invite ]
-    before_action :authenticate_campaign_id, except: [ :create ]
+    before_action :authenticate_campaign_id, except: [ :create, :get_invite ]
 
     def index
         @users = User.where( :campaign_id => @campaign_id, :superuser => false )
@@ -28,8 +28,19 @@ class UsersController < ApplicationController
         render 'positions'
     end
 
+    def get_invite
+        token = PerishableToken.decode(params[:token])
+        @user = User.find(token.data['id'])
+
+        render 'show'
+    end
+
     def create_invite
-        token = PerishableToken.create_good_until_tomorrow({ id: current_user.id, position: params[:position] })
+        tmp_password = SecureRandom.uuid # this feels dirty
+        user = User.new( :email => params[:email], position: params[:position], campaign_id: @campaign_id, created: false, :password => tmp_password, :password_confirmation => tmp_password )
+        user.save
+
+        token = PerishableToken.create_good_until_tomorrow({ id: user.id })
         subject = 'Join Staff'
         body = "<a href='#{params[:url]}#{token.encode}'>Join.</a>"
 
@@ -44,15 +55,13 @@ class UsersController < ApplicationController
 
     def create
         token = PerishableToken.decode(params[:token])
-        admin_user = User.find(token.data['id'])
+        @user = User.find(token.data['id'])
 
-        if DateTime.now < token.good_until && admin_user.admin
-            parameters = create_params(params)
-            parameters[:campaign_id] = admin_user.campaign_id
-            parameters[:position] = token.data['position']
-            @user = User.new(parameters)
+        if DateTime.now < token.good_until
+            parameters = create_params(params) # really creating a new one so use create_params
+            parameters[:created] = true
 
-            if @user.save
+            if @user.update(parameters)
                 token.destroy
                 
                 render 'show'

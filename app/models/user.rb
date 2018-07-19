@@ -52,7 +52,7 @@ class User < ApplicationRecord
   end
 
   def position_info
-    unless self.position.nil? || self.position.empty?
+    unless self.position.nil? || self.position.empty? || !self.created
       if self.address.nil? || self.address.empty?
         errors.add(:address, 'position requires address')
       end

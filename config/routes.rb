@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'staff_positions' => 'users#get_positions'
   get 'staff' => 'users#index'
+  get 'staff/get_invite' => 'users#get_invite'
   get 'staff/:id' => 'users#show'
   post 'staff' => 'users#create'
   post 'staff/create_invite' => 'users#create_invite'

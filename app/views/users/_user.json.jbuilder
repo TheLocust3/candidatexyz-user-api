@@ -17,3 +17,4 @@ json.zipcode user.zipcode
 json.admin user.admin
 json.superuser user.superuser
 json.position user.position
+json.created user.created
