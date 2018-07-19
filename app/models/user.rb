@@ -52,7 +52,17 @@ class User < ApplicationRecord
   end
 
   def position_info
-    unless self.position.nil? || self.position.empty? || !self.created
+    if self.position.nil? || self.position.empty?
+      return
+    end
+
+    if User.where( :campaign_id => campaign_id ).where.not( :id => id ).map { |user| user.position }.include? position
+      errors.add(:position, 'has already been filled')
+
+      return
+    end
+
+    unless !self.created
       if self.address.nil? || self.address.empty?
         errors.add(:address, 'position requires address')
       end

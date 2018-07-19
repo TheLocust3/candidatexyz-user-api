@@ -38,7 +38,10 @@ class UsersController < ApplicationController
     def create_invite
         tmp_password = SecureRandom.uuid # this feels dirty
         user = User.new( :email => params[:email], position: params[:position], campaign_id: @campaign_id, created: false, :password => tmp_password, :password_confirmation => tmp_password )
-        user.save
+        unless user.save
+            render_errors(user)
+            return
+        end
 
         token = PerishableToken.create_good_until_tomorrow({ id: user.id })
         subject = 'Join Staff'
