@@ -35,16 +35,6 @@ class CampaignsController < ApplicationController
         end
     end
 
-    def get_users_with_committee_positions
-        if current_user.campaign_id == params[:id]
-            @users = User.where( :campaign_id => current_user.campaign_id ).where.not( :position => '' )
-
-            render 'users/index'
-        else
-            render :json => {}, :status => 401
-        end
-    end
-
     def create
         @campaign = Campaign.new(create_params(params))
 

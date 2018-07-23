@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     include CandidateXYZ::Concerns::Request
     include CandidateXYZ::Concerns::Authenticatable
 
-    before_action :authenticate_user!, only: [ :index, :show, :update, :destroy, :get_positions ]
+    before_action :authenticate_user!, only: [ :index, :show, :update, :destroy, :get_positions, :get_users_with_committee_positions ]
     before_action :authenticate_admin!, only: [ :update, :destroy, :create_invite ]
     before_action :authenticate_campaign_id, except: [ :create, :get_invite ]
 
@@ -20,6 +20,12 @@ class UsersController < ApplicationController
         else
             render
         end
+    end
+
+    def get_users_with_committee_positions
+        @users = User.where( :campaign_id => current_user.campaign_id ).where.not( :position => '' )
+
+        render 'users/index'
     end
 
     def get_positions
