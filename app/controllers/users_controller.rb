@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     end
 
     def get_users_with_committee_positions
-        @users = User.where( :campaign_id => current_user.campaign_id ).where.not( :position => '' )
+        @users = User.where( :campaign_id => @campaign_id ).where.not( :position => '' )
 
         render 'users/index'
     end
