@@ -72,13 +72,14 @@ class UsersController < ApplicationController
 
             if @user.update(parameters)
                 token.destroy
+                post("#{Rails.application.secrets.volunteer_api}/notifications", { title: "A user has joined", body: "#{@user.first_name} #{@user.last_name} has accepted their invite", link: "/campaign/staff/#{@user.id}", campaign_id: @user.campaign_id, user_id: '' })
                 
                 render 'show'
             else
                 render_errors(@user)
             end
         else
-            render_unauthorized
+            render :json => {}, :status => 401
         end
     end
 
