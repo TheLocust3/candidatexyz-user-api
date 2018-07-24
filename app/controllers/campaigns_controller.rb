@@ -39,6 +39,11 @@ class CampaignsController < ApplicationController
         @campaign = Campaign.new(create_params(params))
 
         if @campaign.save
+            post("#{Rails.application.secrets.volunteer_api}/notifications", { title: "Form your campaign's Political Action Committee", body: "", link: "/campaign/committee", campaign_id: @campaign.id, user_id: '' })
+            post("#{Rails.application.secrets.volunteer_api}/notifications", { title: "Appoint/invite a Candidate", body: "Invite them to your campaign or appoint an existing user as candidate", link: "/campaign/invite-staff", campaign_id: @campaign.id, user_id: '' })
+            post("#{Rails.application.secrets.volunteer_api}/notifications", { title: "Appoint/invite a committee Chair", body: "Invite them to your campaign or appoint an existing user as chair", link: "/campaign/invite-staff", campaign_id: @campaign.id, user_id: '' })
+            post("#{Rails.application.secrets.volunteer_api}/notifications", { title: "Appoint/invite a committee Treasurer", body: "Invite them to your campaign or appoint an existing user as treasurer", link: "/campaign/invite-staff", campaign_id: @campaign.id, user_id: '' })
+
             render 'show'
         else
             render_errors(@campaign)
