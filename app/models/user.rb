@@ -10,7 +10,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  belongs_to :campaign
+  belongs_to :campaign, required: false
 
   def self.POSITIONS
     @@POSITIONS
