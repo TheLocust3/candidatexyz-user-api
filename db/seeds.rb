@@ -17,5 +17,5 @@ if User.where(email: 'demo@candidatexyz.com').length == 0
 end
 
 if User.where(email: 'jake@candidatexyz.com').length == 0
-    User.create!(email: 'jake@candidatexyz.com', password: 'password', password_confirmation: 'password')
+    User.create!(email: 'jake@candidatexyz.com', password: 'password', password_confirmation: 'password', admin: true)
 end

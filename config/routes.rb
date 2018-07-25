@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'staff/:id' => 'users#show'
   post 'staff' => 'users#create'
   post 'staff/create_invite' => 'users#create_invite'
+  patch 'staff/:id/campaign_id' => 'users#update_campaign_id'
   patch 'staff/:id' => 'users#update'
   delete 'staff/:id' => 'users#destroy'
 

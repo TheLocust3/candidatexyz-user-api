@@ -38,13 +38,13 @@ class User < ApplicationRecord
   def superuser_attributes
     if self.persisted?
       if self.changed.include?('superuser')
-        errors.add(:superuser, :immutable)
+        errors.add(:superuser, 'is immutable')
 
         self.reload
       end
 
-      if self.changed.include?('campaign_id') && !self.superuser
-        errors.add(:campaign_id, :immutable)
+      if self.changed.include?('campaign_id') && !self.superuser && !self.campaign_id_was.nil?
+        errors.add(:campaign_id, 'is immutable')
 
         self.reload
       end

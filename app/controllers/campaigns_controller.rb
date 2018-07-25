@@ -1,8 +1,9 @@
 class CampaignsController < ApplicationController
+    include CandidateXYZ::Concerns::Request
     include CandidateXYZ::Concerns::Authenticatable
 
     before_action :authenticate_user!, only: [ :index, :show, :create, :update, :destroy ]
-    before_action :authenticate_admin!, only: [ :create, :update, :destroy ]
+    before_action :authenticate_admin!, only: [ :update, :destroy ]
     before_action :authenticate_superuser, only: [ :index ]
 
     def index
@@ -36,6 +37,12 @@ class CampaignsController < ApplicationController
     end
 
     def create
+        unless @current_user.campaign_id.nil?
+            render :json => {}, :status => 401
+
+            return
+        end
+
         @campaign = Campaign.new(create_params(params))
 
         if @campaign.save

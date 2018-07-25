@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     include CandidateXYZ::Concerns::Request
     include CandidateXYZ::Concerns::Authenticatable
 
-    before_action :authenticate_user!, only: [ :index, :show, :update, :destroy, :get_positions, :get_users_with_committee_positions ]
+    before_action :authenticate_user!, only: [ :index, :show, :update, :destroy, :get_positions, :get_users_with_committee_positions, :update_campaign_id ]
     before_action :authenticate_admin!, only: [ :update, :destroy, :create_invite ]
     before_action :authenticate_campaign_id, except: [ :create, :get_invite ]
 
@@ -80,6 +80,23 @@ class UsersController < ApplicationController
             end
         else
             render :json => {}, :status => 401
+        end
+    end
+
+    def update_campaign_id
+        @user = User.where( :id => params[:id]).first
+        unless @user.campaign_id.nil?
+            render :json => {}, :status => 401
+
+            return
+        end
+
+        @user.campaign_id = params[:campaign_id]
+
+        if @user.save
+            render 'show'
+        else
+            render_errors(@user)
         end
     end
 
