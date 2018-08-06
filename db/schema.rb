@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180724184111) do
+ActiveRecord::Schema.define(version: 20180806124946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,10 @@ ActiveRecord::Schema.define(version: 20180724184111) do
     t.string "url"
     t.datetime "election_day"
     t.datetime "preliminary_day"
+    t.string "city"
+    t.string "state"
+    t.string "country", default: "United States"
+    t.string "office_type"
   end
 
   create_table "perishable_tokens", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
