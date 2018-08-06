@@ -5,8 +5,8 @@ class ApplicationController < ActionController::API
     respond_to :json
 
     def configure_permitted_parameters
-        devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :first_name, :last_name, :position, :address, :city, :state, :country, :zipcode, :phone_number, :party, :created])
-        devise_parameter_sanitizer.permit(:account_update, keys: [:email, :password, :password_confirmation, :first_name, :last_name, :position, :address, :city, :state, :country, :zipcode, :phone_number, :party, :campaign_id, :created])
+        devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :first_name, :middle_name, :last_name, :position, :address, :city, :state, :country, :zipcode, :phone_number, :party, :created])
+        devise_parameter_sanitizer.permit(:account_update, keys: [:email, :password, :password_confirmation, :first_name, :middle_name, :last_name, :position, :address, :city, :state, :country, :zipcode, :phone_number, :party, :campaign_id, :created])
     end
 
     def authenticate_admin!

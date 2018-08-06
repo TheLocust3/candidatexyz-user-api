@@ -63,6 +63,10 @@ class User < ApplicationRecord
     end
 
     unless !self.created
+      if self.middle_name.nil? || self.middle_name.empty?
+        errors.add(:middle_name, 'position requires middle name')
+      end
+
       if self.address.nil? || self.address.empty?
         errors.add(:address, 'position requires address')
       end

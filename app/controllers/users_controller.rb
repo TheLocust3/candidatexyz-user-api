@@ -119,10 +119,10 @@ class UsersController < ApplicationController
 
     private
     def create_params(params)
-        params.permit(:email, :first_name, :last_name, :password, :password_confirmation, :address, :city, :state, :country, :zipcode, :phone_number, :party, :campaign_id)
+        params.permit(:email, :first_name, :middle_name, :last_name, :password, :password_confirmation, :address, :city, :state, :country, :zipcode, :phone_number, :party, :campaign_id)
     end
 
     def update_params(params)
-        params.permit(:email, :first_name, :last_name, :admin, :position, :address, :city, :state, :country, :zipcode, :phone_number, :party)
+        params.permit(:email, :first_name, :middle_name, :last_name, :admin, :position, :address, :city, :state, :country, :zipcode, :phone_number, :party)
     end
 end

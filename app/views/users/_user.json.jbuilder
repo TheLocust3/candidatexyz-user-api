@@ -3,6 +3,7 @@ json.campaign_id user.campaign_id
 json.email user.email
 
 json.firstName user.first_name
+json.middleName user.middle_name
 json.lastName user.last_name
 
 json.phoneNumber user.phone_number
