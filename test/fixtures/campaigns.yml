@@ -6,3 +6,12 @@ one:
   state: MA
   country: United States
   office_type: Municipal
+
+two:
+  name: Test Campaign 2
+  preliminary_day: <%= DateTime.now - 1.month %>
+  election_day: <%= DateTime.now %>
+  city: Reading
+  state: MA
+  country: United States
+  office_type: Municipal
