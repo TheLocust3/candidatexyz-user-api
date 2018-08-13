@@ -19,7 +19,7 @@ bundle config --local local.candidatexyz-common ../common/
 bundle install --path vendor/bundle
 
 bundle exec rake db:create
-bundle exec rake db:schema:load
+bundle exec rake db:migrate
 bundle exec rake db:seed
 
 bundle exec puma -b tcp://127.0.0.1:3002 &
@@ -30,7 +30,7 @@ bundle config --local local.candidatexyz-common common/
 bundle install --path vendor/bundle
 
 bundle exec rake db:create
-bundle exec rake db:schema:load
+bundle exec rake db:migrate
 bundle exec rake db:seed
 
 echo Running tests
