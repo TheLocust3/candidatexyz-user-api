@@ -29,4 +29,4 @@ gem 'devise_token_auth'
 gem 'active_model_serializers'
 gem 'httparty'
 
-gem 'candidatexyz-common', :github => 'TheLocust3/candidatexyz-common', :branch => 'master'
+gem 'candidatexyz-common', :github => 'TheLocust3/candidatexyz-common'

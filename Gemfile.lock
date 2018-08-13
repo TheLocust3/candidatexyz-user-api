@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/TheLocust3/candidatexyz-common.git
-  revision: 0d260bb6a5d92ee2deb55a8896ead2f5a2d1d21f
-  branch: master
+  revision: 1e5bde88e9421c1fb988f795f204f0b66842203a
   specs:
-    candidatexyz-common (0.1.0)
+    candidatexyz-common (0.1.1)
       httparty
+      minitest-reporters
       rails (~> 5.1.4)
 
 GEM
