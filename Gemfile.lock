@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/TheLocust3/candidatexyz-common.git
-  revision: 1e5bde88e9421c1fb988f795f204f0b66842203a
+  revision: 7084087a2a3aa20ec989886b94af484fce91ff6b
+  branch: master
   specs:
     candidatexyz-common (0.1.1)
       httparty
