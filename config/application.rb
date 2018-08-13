@@ -22,7 +22,7 @@ module UserApi
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins '*'
+        origins 'candidatexyz.com', /.+\.candidatexyz.com/, /127.0.0.1:\d+/
         resource '*', headers: :any, expose: ['access-token', 'token-type', 'client', 'expiry', 'uid'], methods: [:get, :post, :options, :delete, :put, :patch]
       end
     end
