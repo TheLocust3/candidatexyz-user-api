@@ -18,6 +18,10 @@ pipeline {
                 dir('common') {
                     git branch: 'master', url: 'git@github.com:TheLocust3/candidatexyz-common.git', credentialsId:'common_ssh'
                 }
+
+                dir('volunteer-api') {
+                    git branch: 'master', url: 'git@github.com:TheLocust3/volunteer-api.git', credentialsId:'test'
+                }
             }
         }
 
