@@ -23,6 +23,7 @@ bundle exec rake db:migrate
 bundle exec rake db:seed
 
 bundle exec puma -b tcp://127.0.0.1:3002 &
+sleep 30 # wait for server to start
 
 cd ../
 
