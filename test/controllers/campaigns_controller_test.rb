@@ -4,7 +4,7 @@ class CampaignsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @campaign = campaigns(:one)
 
-    user = authenticate_test # TODO: Don't auth every single time
+    user = authenticate_test
 
     @auth_headers = user[:headers]
     @email = user[:user]['email']

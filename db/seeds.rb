@@ -23,7 +23,7 @@ end
 # testing stuff
 test_campaign = Campaign.where(name: 'Test').first
 if test_campaign.nil?
-    test_campaign = Campaign.create!(name: 'Test', preliminary_day: DateTime.now - 1.month, election_day: DateTime.now, city: 'Test City', state: 'Test State', country: 'Test Country', office_type: 'Municipal')
+    test_campaign = Campaign.create!(name: 'Test', preliminary_day: DateTime.now - 1.month, election_day: DateTime.now, city: 'Test City', state: 'MA', country: 'United States', office_type: 'Municipal')
 end
 
 if User.where(email: 'test@gmail.com').length == 0
