@@ -1,6 +1,7 @@
 # User API
 
-The user API microservice for the [candidateXYZ](https://candidatexyz.com) webapp.
+The user API microservice for the [candidateXYZ](https://candidatexyz.com) webapp.  
+Check out the story [here](https://jakekinsella.com/projects/candidatexyz).
 
 ## Running
 
